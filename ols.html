@@ -1,35 +1,52 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+        <script type="text/javascript" src="sourcedata.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+        var w = 500;
+        var h = 500;
 
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: auto;
-  position: relative;
-  width: 960px;
-}
 
-form {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-}
+		dataset = source_data;
 
-</style>
-<form>
-  <label><input type="radio" name="mode" value="size"> Size</label>
-  <label><input type="radio" name="mode" value="count" checked> Count</label>
-</form>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
+		d3.select("body").selectAll("p")
+    		.data(dataset)
+    		.enter()
+    		.append("p")
+    		.text(function(d) {return "New paragraph: " + d;} );
 
-d3.json("flare_json.json",
- function(data) {
-alert(data.length)
-});
+		var svg = d3.select("body").append("svg");
+			
+		var rects = svg.selectAll("rect")
+                 .data(dataset)
+                 .enter()
+                 .append("rect");
+                 
+        rects.attr("x", function(d, i) {
+            return (i * 50) + 25;
+        });
+        
+        rects.attr("y", h-200);
+        
+        rects.attr("height", function(d, i) {
+            return (d );
+        });
+		
+		rects.attr("width", 50);
+        
 
-alert("Keek");
 
-</script>
+
+
+        </script>
+    </body>
+</html>  
+
+
 
 
